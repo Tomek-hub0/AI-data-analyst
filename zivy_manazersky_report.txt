@@ -1,0 +1,30 @@
+Vážený pane řediteli,
+
+předkládám Vám stručný manažerský report založený na analýze dat o 398 automobilech. Cílem je poskytnout přehled o klíčových trendech a rozdílech napříč trhy, které jsou relevantní pro naši strategii.
+
+**Klíčové poznatky:**
+
+1.  **Spotřeba paliva:** Průměrná spotřeba celé analyzované flotily činí 23.51 MPG (Miles Per Gallon). To je základní referenční bod pro porovnání efektivity vozidel na trhu.
+2.  **Výkon motoru podle regionu:** Z analýzy vyplývá výrazný rozdíl ve výkonu motorů podle země původu automobilu:
+    *   **USA:** Automobily pocházející z USA vykazují podstatně vyšší průměrný výkon, a to **119.0 koní**.
+    *   **Evropa:** Evropské vozy dosahují průměrného výkonu **80.6 koní**.
+    *   **Japonsko:** Japonské automobily mají nejnižší průměrný výkon, konkrétně **79.8 koní**.
+
+**Strategické implikace pro naši automobilku:**
+
+Tyto statistiky jasně naznačují odlišné preference a designové filozofie na jednotlivých regionálních trzích:
+
+*   **Americký trh** zjevně klade silný důraz na vyšší výkon motoru. Pro úspěšnou konkurenci v tomto regionu bude klíčové nabízet modely s robustními motory a vyšším výkonem.
+*   **Evropský a japonský trh** se zdá být orientován spíše na vyváženost, kde výkon pravděpodobně není primárním faktorem a je spíše doplňován efektivitou, spotřebou paliva, spolehlivostí či kompaktností. V těchto regionech bychom měli nadále rozvíjet modely, které uspokojí poptávku po úspornějších a vyváženějších vozidlech.
+
+**Doporučení:**
+
+Doporučuji zvážit přizpůsobení naší produktové a marketingové strategie s ohledem na tyto regionální odlišnosti. Měli bychom detailně prozkoumat, zda naše stávající a plánované modely odpovídají těmto trendům, a případně upravit vývojové plány.
+
+Pro lepší vizualizaci a detailnější pochopení výkonových charakteristik automobilů podle země původu jsem pro Vás připravil graf **'vykon_aut_graf.png'**, který najdete v příloze tohoto reportu.
+
+Rád Vám poskytnu podrobnější analýzu a data k diskuzi.
+
+S pozdravem,
+
+Váš Tým byznysových analytiků
