@@ -3,67 +3,68 @@ import matplotlib.pyplot as plt
 from google import genai
 import os 
 
-print("--- AI + GRAFICKÝ DATOVÝ ANALYTIK SPUŠTĚN ---\n")
+print("--- AI + GRAPHICAL DATA ANALYST STARTING... ---\n")
 
-# 1. NASTAVENÍ GEMINI API KLÍČE 
+# SETTING UP GEMINI API KEY 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/mpg.csv"
 try:
-    print("1. Načítám data o autech...")
+    print("1. LOADING DATA")
     df = pd.read_csv(url)
     
-    pocet_aut = len(df)
-    prumerna_spotreba = df["mpg"].mean()
-    vykon_zeme = df.groupby("origin")["horsepower"].mean().sort_values(ascending=False)
+    num_cars = len(df)
+    avg_consumption = df["mpg"].mean()
+    h_power_country = df.groupby("origin")["horsepower"].mean().sort_values(ascending=False)
     
-    # 2. VYKRESLENÍ A ULOŽENÍ GRAFU
-    print("2. Generuji graf výkonu podle zemí...")
-    plt.figure(figsize=(8, 5)) # Velikost okna grafu
+    # GRAPH
+    print("2. Generating graph...")
+    plt.figure(figsize=(8, 5)) 
     
-    # Vytvoříme sloupečkový graf (bar) s pěknými barvami
-    vykon_zeme.plot(kind="bar", color=["#e74c3c", "#3498db", "#2ecc71"])
+    # Bar chart (Modré odstíny)
+    h_power_country.plot(kind="bar", color=["#3c00ff", "#001eff", "#00bbff"])
     
-    plt.title("Průměrný výkon motoru podle země původu (v koních)", fontsize=14, fontweight="bold")
-    plt.xlabel("Země původu", fontsize=12)
-    plt.ylabel("Výkon (Horsepower)", fontsize=12)
-    plt.xticks(rotation=0) # Aby názvy zemí nebyly nakloněné
-    plt.grid(axis="y", linestyle="--", alpha=0.7) # Jemná mřížka na pozadí
+    plt.title("Average engine power by country of origin (in horsepower)", fontsize=14, fontweight="bold")
+    plt.xlabel("Country of origin", fontsize=12)
+    plt.ylabel("Engine power (Horsepower)", fontsize=12)
+    plt.xticks(rotation=0) 
+    plt.grid(axis="y", linestyle="--", alpha=0.7) 
     
-    # Tímto příkazem graf uložíme jako obrázek na disk
-    plt.savefig("vykon_aut_graf.png", dpi=300, bbox_inches="tight")
-    plt.close() # Zavřeme graf, aby nezabíral paměť
-    print("-> Graf úspěšně uložen jako 'vykon_aut_graf.png'")
+    # Saving graph
+    plt.savefig("horsepower_graph.png", dpi=300, bbox_inches="tight")
+    plt.close() 
+    print("-> Graph successfully saved as 'horsepower_graph.png'")
     
-    # 3. PŘÍPRAVA PRO AI
-    zadani_pro_ai = f"""
-    Jsi špičkový byznysový analytik. Zanalýzuj tato data o automobilech a napiš z nich stručný 
-    manažerský report v češtině pro ředitele naší automobilky.
-    Mentionuj v textu, že jsi pro něj vygeneroval i graf 'vykon_aut_graf.png', který najde v příloze.
+    # 3. PROMPT FOR GEMINI AI (Kompletně v angličtině)
+    prompt_ai = f"""
+    You are a top-tier business analyst. Analyze this automobile dataset and write a brief,
+    professional executive summary report in English for the CEO of our automotive company.
+    Mention in the text that you have also generated a chart named 'horsepower_graph.png', 
+    which is attached to this report.
     
-    Statistiky z dat:
-    - Celkový počet analyzovaných aut: {pocet_aut}
-    - Průměrná spotřeba celé flotily: {prumerna_spotreba:.2f} MPG
-    - Průměrný výkon motoru podle země původu:
-      * USA: {vykon_zeme['usa']:.1f} koní
-      * Evropa: {vykon_zeme['europe']:.1f} koní
-      * Japonsko: {vykon_zeme['japan']:.1f} koní
+    Dataset Statistics:
+    - Total number of analyzed cars: {num_cars}
+    - Fleet average fuel economy: {avg_consumption:.2f} MPG
+    - Average horsepower by country of origin:
+      * USA: {h_power_country['usa']:.1f} HP
+      * Europe: {h_power_country['europe']:.1f} HP
+      * Japan: {h_power_country['japan']:.1f} HP
     """
     
-    print("3. Posílám data do tvého Google Gemini...")
+    print("3. Sending data to Google Gemini AI...")
     response = client.models.generate_content(
         model='gemini-2.5-flash',
-        contents=zadani_pro_ai,
+        contents=prompt_ai,
     )
     
-    # 4. ULOŽENÍ REPORTU
+    # 4. SAVING THE REPORT
     with open("zivy_manazersky_report.txt", "w", encoding="utf-8") as soubor:
         soubor.write(response.text)
         
-    print("\n HOTOVO! Vytvořen textový report i obrázkový graf!")
+    print("\n DONE! English text report and graphical chart successfully created!")
 
 except Exception as e:
-    print(f"\nNastala chyba: {e}")
+    print(f"\nAn error occurred: {e}")
 
 print("\n--------------------------------------------")
